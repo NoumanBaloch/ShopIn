@@ -1,4 +1,5 @@
-﻿using ShopIn.Core;
+﻿using ShopIn.Core.Models;
+using ShopIn.Core.ViewModels;
 using ShopIn.DataAccess.InMemory;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,11 @@ namespace ShopIn.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepository _context;
+        ProductCategoryRepository _productCategories;
         public ProductManagerController()
         {
             _context = new ProductRepository();
+            _productCategories = new ProductCategoryRepository();
         }
         // GET: ProductManager
         public ActionResult Index()
@@ -24,8 +27,10 @@ namespace ShopIn.WebUI.Controllers
 
         public ActionResult Create()
         {
-            Product product = new Product();
-            return View(product);
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+            viewModel.Product = new Product();
+            viewModel.ProductCategories = _productCategories.Collection();
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -48,7 +53,11 @@ namespace ShopIn.WebUI.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+            viewModel.Product = product;
+            viewModel.ProductCategories = _productCategories.Collection();
+            return View(viewModel);
         }
 
         [HttpPost]

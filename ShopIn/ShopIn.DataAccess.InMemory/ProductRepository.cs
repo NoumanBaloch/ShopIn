@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Caching;
-using ShopIn.Core;
+using ShopIn.Core.Models;
 
 namespace ShopIn.DataAccess.InMemory
 {
