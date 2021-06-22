@@ -1,4 +1,5 @@
-﻿using ShopIn.Core.Models;
+﻿using ShopIn.Core.Contracts;
+using ShopIn.Core.Models;
 using ShopIn.Core.ViewModels;
 using ShopIn.DataAccess.InMemory;
 using System;
@@ -11,13 +12,14 @@ namespace ShopIn.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        InMemoryRepository<Product> _context;
-        InMemoryRepository<ProductCategory> _productCategories;
-        public ProductManagerController()
+        IRepository<Product> _context;
+        IRepository<ProductCategory> _productCategories;
+        public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
         {
-            _context = new InMemoryRepository<Product>();
-            _productCategories = new InMemoryRepository<ProductCategory>();
+            _context = productContext;
+            _productCategories = productCategoryContext;
         }
+
         // GET: ProductManager
         public ActionResult Index()
         {
