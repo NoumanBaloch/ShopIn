@@ -1,6 +1,7 @@
 using ShopIn.Core.Contracts;
 using ShopIn.Core.Models;
 using ShopIn.DataAccess.InMemory;
+using ShopIn.DataAccess.SQL;
 using System;
 
 using Unity;
@@ -44,8 +45,8 @@ namespace ShopIn.WebUI
             // container.LoadConfiguration();
 
             // TODO: Register your type's mappings here.
-            container.RegisterType<IRepository<Product>, InMemoryRepository<Product>>();
-            container.RegisterType<IRepository<ProductCategory>, InMemoryRepository<ProductCategory>>();
+            container.RegisterType<IRepository<Product>, SQLRepository<Product>>();
+            container.RegisterType<IRepository<ProductCategory>, SQLRepository<ProductCategory>>();
         }
     }
 }

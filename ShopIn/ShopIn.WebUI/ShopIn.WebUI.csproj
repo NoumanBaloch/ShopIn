@@ -383,6 +383,10 @@
       <Project>{453250A4-CDAF-491D-8CAE-0AF53D24A8B1}</Project>
       <Name>ShopIn.DataAccess.InMemory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ShopIn.DataAccess.SQL\ShopIn.DataAccess.SQL.csproj">
+      <Project>{EE4AED71-A8D5-428F-A6E0-8267C43887E7}</Project>
+      <Name>ShopIn.DataAccess.SQL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
