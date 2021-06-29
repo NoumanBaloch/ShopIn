@@ -4,6 +4,7 @@ using ShopIn.Core.ViewModels;
 using ShopIn.DataAccess.InMemory;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -36,12 +37,19 @@ namespace ShopIn.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {
                 return View(product);
             }
+            
+            if (file != null)
+            {
+                product.Image =  product.Id + Path.GetExtension(file.FileName);
+                file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image);
+            }
+            
             _context.Insert(product);
             _context.Commit();
             return RedirectToAction("Index");
@@ -63,7 +71,7 @@ namespace ShopIn.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product, string Id)
+        public ActionResult Edit(Product product, string Id, HttpPostedFileBase file)
         {
             Product productToEdit = _context.Find(Id);
             if(productToEdit == null)
@@ -75,10 +83,14 @@ namespace ShopIn.WebUI.Controllers
                 return View(product);
             }
 
+            if(file != null)
+            {
+                productToEdit.Image = product.Id + Path.GetExtension(file.FileName);
+                file.SaveAs(Server.MapPath("//Content//ProductImages//") + productToEdit.Image);
+            }
 
             productToEdit.Category = product.Category;
             productToEdit.Description = product.Description;
-            productToEdit.Image = product.Image;
             productToEdit.Name = product.Name;
             productToEdit.Price = product.Price;
 

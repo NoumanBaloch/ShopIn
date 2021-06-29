@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShopIn.Core.Contracts;
+using ShopIn.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,18 @@ namespace ShopIn.WebUI.Controllers
 {
     public class HomeController : Controller
     {
+        IRepository<Product> _productContext;
+        IRepository<ProductCategory> _productCategoryContext;
+
+        public HomeController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
+        {
+            this._productContext = productContext;
+            this._productCategoryContext = productCategoryContext;
+        }
         public ActionResult Index()
         {
-            return View();
+            List<Product> products = _productContext.Collection().ToList();
+            return View(products);
         }
 
         public ActionResult About()
