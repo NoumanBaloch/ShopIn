@@ -24,6 +24,17 @@ namespace ShopIn.WebUI.Controllers
             return View(products);
         }
 
+        public ActionResult Details(string Id)
+        {
+            Product product = _productContext.Find(Id);
+
+            if(product == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(product);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
