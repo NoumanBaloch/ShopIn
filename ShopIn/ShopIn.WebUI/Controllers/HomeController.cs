@@ -1,5 +1,6 @@
 ﻿using ShopIn.Core.Contracts;
 using ShopIn.Core.Models;
+using ShopIn.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,25 @@ namespace ShopIn.WebUI.Controllers
             this._productContext = productContext;
             this._productCategoryContext = productCategoryContext;
         }
-        public ActionResult Index()
+        public ActionResult Index(string Category=null)
         {
-            List<Product> products = _productContext.Collection().ToList();
-            return View(products);
+
+            List<Product> products;
+            List<ProductCategory> categories = _productCategoryContext.Collection().ToList();
+
+            if(Category == null)
+            {
+                products = _productContext.Collection().ToList();
+            }
+            else
+            {
+                products = _productContext.Collection().Where(x => x.Category == Category).ToList();
+            }
+
+            ProductListViewModel model = new ProductListViewModel();
+            model.Products = products;
+            model.ProductCategories = categories;
+            return View(model);
         }
 
         public ActionResult Details(string Id)

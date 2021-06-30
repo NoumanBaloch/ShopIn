@@ -1,15 +1,25 @@
-﻿@model IEnumerable<ShopIn.Core.Models.Product>
+﻿@model ShopIn.Core.ViewModels.ProductListViewModel
 @{ 
     ViewBag.Title = "Home Page";
 }
 
 <h1>Products</h1>
 
-<div class="col-md-12">
+<div class="col-md-2">
+    <h4>Filter By Category</h4>
+    <div class="list-group">
+        @Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item"} )
+        @foreach(var category in Model.ProductCategories)
+        {
+            @Html.ActionLink(category.Category, "Index", new { Category = category.Category } , new { @class = Request["Category"] == category.Category ? "list-group-item active" : "list-group-item" })
+        }
+    </div>
+</div>
+<div class="col-md-10">
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Products)
     {
-        <div class="col-md-4" style="height:400px; width:300px; padding: 10px; margin: 10px; border: solid thin white">
+        <div class="col-md-4" style="height:400px; width:300px; padding: 10px; margin: 10px; border: solid thin whitesmoke; text-align: center">
             <div class="col-md-12">
                 <img class="img img-responsive" style="height:250px" src="~/Content/ProductImages/@item.Image" />
             </div>
@@ -23,7 +33,7 @@
                 <p>@item.Price</p>
             </div>
             <div class="col-md-12">
-                <a class="btn btn-default">Add to Basket</a>
+                <a class="btn btn-primary">Add to Basket</a>
             </div>
         </div>
     }
