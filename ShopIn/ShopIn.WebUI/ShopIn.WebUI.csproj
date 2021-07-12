@@ -185,6 +185,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductCategoryManagerController.cs" />
@@ -365,6 +366,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ProductImages\" />
+    <Folder Include="Views\Basket\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -389,6 +391,10 @@
     <ProjectReference Include="..\ShopIn.DataAccess.SQL\ShopIn.DataAccess.SQL.csproj">
       <Project>{EE4AED71-A8D5-428F-A6E0-8267C43887E7}</Project>
       <Name>ShopIn.DataAccess.SQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShopIn.Services\ShopIn.Services.csproj">
+      <Project>{56B07045-B59B-4014-ADBF-0390D9132C1D}</Project>
+      <Name>ShopIn.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
