@@ -10,7 +10,7 @@
     <h4>Product</h4>
     <hr />
     <dl class="dl-horizontal">
-      
+
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -47,9 +47,12 @@
             @Html.DisplayNameFor(model => model.Image)
         </dt>
 
+        <dt></dt>
         <dd>
-            @Html.DisplayFor(model => model.Image)
+            <a href="@Url.Action("AddToBasket", "Basket", new { id = Model.Id })" class="btn btn-primary">Add To Basket</a>
         </dd>
+
+        
 
     </dl>
 </div>
