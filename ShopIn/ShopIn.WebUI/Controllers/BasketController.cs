@@ -26,6 +26,7 @@ namespace ShopIn.WebUI.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult AddToBasket(string Id)
         {
             _basketService.AddToBasket(this.HttpContext, Id);

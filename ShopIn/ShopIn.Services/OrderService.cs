@@ -35,6 +35,22 @@ namespace ShopIn.Services
             _orderContext.Insert(baseOrder);
             _orderContext.Commit();
         }
+
+        public List<Order> GetOrderList()
+        {
+            return _orderContext.Collection().ToList();
+        }
+
+        public Order GetOrder(string Id)
+        {
+            return _orderContext.Find(Id);
+        }
+
+        public void UpdateOrder(Order updatedOrder)
+        {
+            _orderContext.Update(updatedOrder);
+            _orderContext.Commit();
+        }
         
     }
 }
