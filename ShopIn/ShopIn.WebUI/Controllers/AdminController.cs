@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ShopIn.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         public ActionResult Index()
